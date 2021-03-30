@@ -91,6 +91,9 @@ if (isset($_SESSION['userkullanici_mail'])) {
     <!-- Switch Style CSS -->
     <link rel="stylesheet" href="css\hover-min.css">
 
+    <!-- Nouislider Style CSS -->
+    <link rel="stylesheet" href="vendor\noUiSlider\nouislider.min.css">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 
@@ -393,6 +396,8 @@ if (isset($_SESSION['userkullanici_mail'])) {
                                                 <li><a href="kategori-<?=seo($kategoricek['kategori_ad']."-".$kategoricek['kategori_id'])?>"><?php echo $kategoricek['kategori_ad'] ?></a></li>
 
                                             <?php } ?>
+
+                                            <li><a href="kategoriler.php">Tümünü Listele</a></li>
                                         </ul> 
 
                                     </li>

@@ -109,6 +109,12 @@
 <!-- Isotope js -->
 <script src="js\isotope.pkgd.min.js" type="text/javascript"></script>
 
+<!-- Nouislider Js -->
+<script src="vendor\noUiSlider\nouislider.min.js" type="text/javascript"></script>
+
+<!-- wNumb Js -->
+<script src="js\wNumb.js" type="text/javascript"></script>
+
 <!-- Gridrotator js -->
 <script src="js\jquery.gridrotator.js" type="text/javascript"></script>
 

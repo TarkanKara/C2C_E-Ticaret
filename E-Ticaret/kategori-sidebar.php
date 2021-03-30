@@ -13,17 +13,67 @@
                     'durum' => 1
                 ));
 
-                while($kategoricek=$kategorisor->fetch(PDO::FETCH_ASSOC)){?>
+                while($kategoricek=$kategorisor->fetch(PDO::FETCH_ASSOC)){
 
-                    <h5><b><li><a href="#"><?php echo $kategoricek['kategori_ad'] ?></span></a></li></b></h5>
+                    $kategori_id=$kategoricek['kategori_id'];
+
+                    ?>
+
+                    <h5><b><li><a href="kategori-<?=seo($kategoricek['kategori_ad'])."-".$kategoricek['kategori_id'] ?>"><?php echo $kategoricek['kategori_ad'] ?><span>(
+
+                        <!--Kagerilere göre ürünlerin sayısı count fonksiyonu ile listeleme -->
+                        <?php  
+
+                        $urunsay=$db->prepare("SELECT COUNT('kategori_id') AS say FROM urun WHERE kategori_id=:id");
+                        $urunsay->execute(array(
+                            'id' => $kategori_id
+                        ));
+                        $saycek=$urunsay->fetch(PDO::FETCH_ASSOC);
+
+                        echo $saycek['say'];
+
+                        ?>
+
+                    )</span></a></li></b></h5>
+
 
                 <?php } ?>
 
+                <!-- Tüm Ürünlerin Sayısını  -->
+                <?php  
+
+                $urunsay=$db->prepare("SELECT * FROM urun ");
+                $urunsay->execute();
+
+                $sayy=0;
+
+                while ($saycek=$urunsay->fetch(PDO::FETCH_ASSOC)) { $sayy++ ?>
+
+
+                <?php  } ?>
+
+                <h5><b><li><a href="kategoriler.php">Tümünü Listele<span style="color: black;">( <?php echo $sayy ?> )</span></a></li></b></h5>
+                
             </ul>
         </div>
     </div>
 
     <div class="sidebar-item">
+        <div class="sidebar-item-inner">
+            <h3 class="sidebar-item-title">Fiyat Aralığı</h3>
+            <div id="price-range-wrapper" class="price-range-wrapper">
+                <div id="price-range-filter"></div>
+                <div class="price-range-select">
+                    <div class="price-range" id="price-range-min"></div>
+                    <div class="price-range" id="price-range-max"></div>
+                </div>
+                <button class="sidebar-full-width-btn disabled" type="submit" value="Login"><i class="fa fa-search" aria-hidden="true"></i>FİLTRELE</button>
+            </div>
+        </div>
+    </div>
+
+    <!--
+         <div class="sidebar-item">
         <div class="sidebar-item-inner">
             <h3 class="sidebar-item-title">En Çok Satanlar</h3>
             <div class="sidebar-single-item-grid">
@@ -56,4 +106,8 @@
 
         </div>
     </div>
+
+-->
+
+
 </div>

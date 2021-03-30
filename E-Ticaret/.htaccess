@@ -16,9 +16,8 @@ RewriteRule ^(.*)$ $1.php
 #ErrorDocument 404 404.php
 
 
-
-RewriteRule ^sayfa-([0-9a-zA-Z-_]+)  menu-detay.php?sef=$1 [L,QSA]
 #RewriteRule ^kategori-([0-9a-zA-Z-_]+)  kategoriler.php?sef=$1 [L,QSA]
+RewriteRule ^sayfa-([0-9a-zA-Z-_]+)  menu-detay.php?sef=$1 [L,QSA]
 RewriteRule ^urun-([0-9a-zA-Z-_]+)-([0-9]+)$  urun-detay.php?sef=$1&urun_id=$2 [L,QSA]
 RewriteRule ^kategori-([0-9a-zA-Z-_]+)-([0-9]+)$  kategoriler.php?sef=$1&kategori_id=$2 [L,QSA]
 
