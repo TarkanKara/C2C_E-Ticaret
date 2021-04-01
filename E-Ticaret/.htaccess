@@ -20,6 +20,7 @@ RewriteRule ^(.*)$ $1.php
 RewriteRule ^sayfa-([0-9a-zA-Z-_]+)  menu-detay.php?sef=$1 [L,QSA]
 RewriteRule ^urun-([0-9a-zA-Z-_]+)-([0-9]+)$  urun-detay.php?sef=$1&urun_id=$2 [L,QSA]
 RewriteRule ^kategori-([0-9a-zA-Z-_]+)-([0-9]+)$  kategoriler.php?sef=$1&kategori_id=$2 [L,QSA]
+RewriteRule ^satici-([0-9a-zA-Z-_]+)-([0-9]+)$  user.php?sef=$1&kullanici_id=$2 [L,QSA]
 
 
 #RewriteRule ^urun-([0-9a-zA-Z-_]+)  urun-detay.php?sef=$1 [L,QSA]

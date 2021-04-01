@@ -1,11 +1,19 @@
 ﻿<?php require_once 'header.php'; 
 
-$urunsor=$db->prepare("SELECT * FROM urun WHERE urun_id=:urun_id AND urun_durum=:urun_durum ORDER BY urun_zaman DESC");
+/*
+$urunsor=$db->prepare("SELECT urun.*,kullanici.* FROM urun INNER JOIN kullanici ON urun.kullanici_id=kullanici.kullanici_id WHERE urun_id=:urun_id AND urun_durum=:urun_durum ORDER BY urun_zaman DESC");
 $urunsor->execute(array(
     'urun_id'      => $_GET['urun_id'],
     'urun_durum'   => 1
 ));
+*/
 
+$urunsor=$db->prepare("SELECT urun.* ,kategori.* ,kullanici.* FROM urun INNER JOIN kategori ON urun.kategori_id=kategori.kategori_id INNER JOIN kullanici ON urun.kullanici_id=kullanici.kullanici_id WHERE urun_id=:urun_id AND urun_durum=:urun_durum ORDER BY urun_zaman DESC");
+$urunsor->execute(array(
+    'urun_id'      => $_GET['urun_id'],
+    'urun_durum'   => 1
+));
+$say=$kullanicisor->rowCount();
 $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
 
 ?>
@@ -27,13 +35,14 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
         <div class="pagination-wrapper">
             <ul>
                 <li><a href="index.php">ANASAYFA</a><span> -</span></li>
-                <li><a href="kategori.php">KATEGORİLER</a><span> -</span></li>
+                <li><a href="kategoriler.php">KATEGORİLER</a><span> -</span></li>
                 <li style="color: red;"><?php echo $uruncek['urun_ad'] ?></li>
             </ul>
         </div>
     </div>  
 </div> 
-<!-- Inner Page Banner Area End Here -->          
+<!-- Inner Page Banner Area End Here -->  
+
 <!-- Product Details Page Start Here -->
 <div class="product-details-page bg-secondary">                
     <div class="container">
@@ -95,77 +104,18 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
                     <h3 class="title-inner-section">BENZER ÜRÜNLER</h3>                               
                     <div class="row more-product-item-wrapper">
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
+                            
                             <div class="more-product-item">
                                 <div class="more-product-item-img">
-                                    <img src="img\product\more1.jpg" alt="product" class="img-responsive">
+                                    <img style="width: 101px; height: 92px;" src="<?php echo $uruncek['urunfoto_resimyol'] ?>" alt="<?php echo $uruncek['urun_ad'] ?>" class="img-responsive">
                                 </div>
                                 <div class="more-product-item-details">
-                                    <h4><a href="#">Grand Ballet - Dance</a></h4>
-                                    <div class="p-title">PSD Template</div>
-                                    <div class="p-price">$12</div>
+                                    <h4><a href="urun-<?=seo($uruncek['urun_ad'])."-".$uruncek['urun_id'] ?>"><?php echo $uruncek['urun_ad'] ?></a></h4>
+                                    <div class="p-title"><?php echo mb_substr($uruncek['kategori_ad'], 0,20,'UTF-8') ?></div>
+                                    <div class="p-price"><?php echo $uruncek['urun_fiyat'] ?> TL</div>
                                 </div>
                             </div>
                         </div>  
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
-                            <div class="more-product-item">
-                                <div class="more-product-item-img">
-                                    <img src="img\product\more2.jpg" alt="product" class="img-responsive">
-                                </div>
-                                <div class="more-product-item-details">
-                                    <h4><a href="#">Grand Ballet - Dance</a></h4>
-                                    <div class="p-title">PSD Template</div>
-                                    <div class="p-price">$20</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
-                            <div class="more-product-item">
-                                <div class="more-product-item-img">
-                                    <img src="img\product\more3.jpg" alt="product" class="img-responsive">
-                                </div>
-                                <div class="more-product-item-details">
-                                    <h4><a href="#">Grand Ballet - Dance</a></h4>
-                                    <div class="p-title">PSD Template</div>
-                                    <div class="p-price">$49</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
-                            <div class="more-product-item">
-                                <div class="more-product-item-img">
-                                    <img src="img\product\more4.jpg" alt="product" class="img-responsive">
-                                </div>
-                                <div class="more-product-item-details">
-                                    <h4><a href="#">Grand Ballet - Dance</a></h4>
-                                    <div class="p-title">PSD Template</div>
-                                    <div class="p-price">$18</div>
-                                </div>
-                            </div>
-                        </div>                                  
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
-                            <div class="more-product-item">
-                                <div class="more-product-item-img">
-                                    <img src="img\product\more5.jpg" alt="product" class="img-responsive">
-                                </div>
-                                <div class="more-product-item-details">
-                                    <h4><a href="#">Grand Ballet - Dance</a></h4>
-                                    <div class="p-title">PSD Template</div>
-                                    <div class="p-price">$59</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
-                            <div class="more-product-item">
-                                <div class="more-product-item-img">
-                                    <img src="img\product\more6.jpg" alt="product" class="img-responsive">
-                                </div>
-                                <div class="more-product-item-details">
-                                    <h4><a href="#">Grand Ballet - Dance</a></h4>
-                                    <div class="p-title">PSD Template</div>
-                                    <div class="p-price">$48</div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -173,72 +123,63 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
                 <div class="fox-sidebar">
                     <div class="sidebar-item">
                         <div class="sidebar-item-inner">
-                            <h3 class="sidebar-item-title">ÜRÜN FİYATI</h3>
-                            <ul class="sidebar-product-price">
-                                <li>$59.00</li>
-                                <li>
-                                    <form id="personal-info-form">
-                                        <div class="custom-select">
-                                            <select id="categories" class='select2'>
-                                                <option value="0">Regular
-                                                    <option value="1">Extended
-                                                    </select>
-                                                </div>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                    <ul class="sidebar-product-btn">
-                                        <li> <a href="#" class="add-to-cart-btn" id="cart-button"><i class="fa fa-shopping-cart" aria-hidden="true"></i> SEPETE EKLE</a></li>
-                                        <li><a href="#" class="add-to-favourites-btn" id="favourites-button"><i class="fa fa-heart-o" aria-hidden="true"></i> FAVORİLERE EKLE</a></li>
-                                        <li><a href="#" class="buy-now-btn" id="buy-button">SATIŞ</a></li>
-                                    </ul>
-                                </div>
-                            </div>                                
-                            <div class="sidebar-item">
-                                <div class="sidebar-item-inner">
-                                    <ul class="sidebar-sale-info">
-                                        <li><i class="fa fa-shopping-cart" aria-hidden="true"></i></li>
-                                        <li>05</li>
-                                        <li>SATIŞ</li>                                           
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="sidebar-item">
-                                <div class="sidebar-item-inner">
-                                    <h3 class="sidebar-item-title">ÜRÜN BİLGİSİ</h3>
-                                    <ul class="sidebar-product-info">
-                                        <li>Released On:<span> 1 January, 2016</span></li>
-                                        <li>Last Update:<span> 20 April, 2016</span></li>
-                                        <li>Download:<span> 613</span></li>
-                                        <li>Version:<span> 1.1</span></li>
-                                        <li>Compatibility:<span> Wordpress 4+</span></li>
-                                        <li>Compatible Browsers:<span> IE9, IE10, IE11, Firefox, Safari, Opera, Chrome</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="sidebar-item">
-                                <div class="sidebar-item-inner">
-                                    <h3 class="sidebar-item-title">SATICI BİLGİLERİ</h3>
-                                    <div class="sidebar-author-info">
-                                        <img src="img\profile\avatar.jpg" alt="product" class="img-responsive">
-                                        <div class="sidebar-author-content">
-                                            <h3>PsdBoss</h3>
-                                            <a href="#" class="view-profile">View Profile</a>
-                                        </div>
-                                    </div>
-                                    <ul class="sidebar-badges-item">
-                                        <li><img src="img\profile\badges1.png" alt="badges" class="img-responsive"></li>
-                                        <li><img src="img\profile\badges2.png" alt="badges" class="img-responsive"></li>
-                                        <li><img src="img\profile\badges3.png" alt="badges" class="img-responsive"></li>
-                                        <li><img src="img\profile\badges4.png" alt="badges" class="img-responsive"></li>
-                                        <li><img src="img\profile\badges5.png" alt="badges" class="img-responsive"></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <h3 align="center" class="sidebar-item-title">ÜRÜN FİYATI</h3>
+                            <ul  class="sidebar-product-price">
+                                <li style="font-size:30px; align-items: center;"><?php echo $uruncek['urun_fiyat'] ?> TL</li>
+                                <li></li>
+                            </ul>
+                            <ul class="sidebar-product-btn">
+                                <li> <a href="#" class="add-to-cart-btn" id="cart-button"><i class="fa fa-shopping-cart" aria-hidden="true"></i> SEPETE EKLE</a></li>
+                                <li><a href="#" class="add-to-favourites-btn" id="favourites-button"><i class="fa fa-heart-o" aria-hidden="true"></i> FAVORİLERE EKLE</a></li>
+                                <li><a href="#" class="buy-now-btn" id="buy-button">SATIŞ</a></li>
+                            </ul>
                         </div>
-                    </div>                        
+                    </div>                                
+                    <div class="sidebar-item">
+                        <div class="sidebar-item-inner">
+                            <ul class="sidebar-sale-info">
+                                <li><i class="fa fa-shopping-cart" aria-hidden="true"></i></li>
+                                <li>05</li>
+                                <li>SATIŞ</li>                                           
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sidebar-item">
+                        <div class="sidebar-item-inner">
+                            <h3 class="sidebar-item-title">ÜRÜN BİLGİSİ</h3>
+                            <ul class="sidebar-product-info">
+                                <li>Released On:<span> 1 January, 2016</span></li>
+                                <li>Last Update:<span> 20 April, 2016</span></li>
+                                <li>Download:<span> 613</span></li>
+                                <li>Version:<span> 1.1</span></li>
+                                <li>Compatibility:<span> Wordpress 4+</span></li>
+                                <li>Compatible Browsers:<span> IE9, IE10, IE11, Firefox, Safari, Opera, Chrome</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sidebar-item">
+                        <div class="sidebar-item-inner">
+                            <h3 class="sidebar-item-title">SATICI BİLGİLERİ</h3>
+                            <div class="sidebar-author-info">
+                                <img style="width: 72px; height: 69px;" src="<?php echo $uruncek['kullanici_magazafoto'] ?>" alt="product" class="img-responsive">
+                                <div class="sidebar-author-content">
+                                    <h3><?php echo $uruncek['kullanici_ad']." ".substr($uruncek['kullanici_soyad'],0,1) ?>.</h3>
+                                    <a href="satici-<?=seo($uruncek['kullanici_ad']."-".$uruncek['kullanici_soyad'])."-".$uruncek['kullanici_id']?>" class="view-profile">Profili Görüntüle</a>
+                                </div>
+                            </div>
+                            <ul class="sidebar-badges-item">
+                                <li><img src="img\profile\badges1.png" alt="badges" class="img-responsive"></li>
+                                <li><img src="img\profile\badges2.png" alt="badges" class="img-responsive"></li>
+                                <li><img src="img\profile\badges3.png" alt="badges" class="img-responsive"></li>
+                                <li><img src="img\profile\badges4.png" alt="badges" class="img-responsive"></li>
+                                <li><img src="img\profile\badges5.png" alt="badges" class="img-responsive"></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </div>                        
         </div>
-        <!-- Product Details Page End Here -->
-        <?php require_once 'footer.php'; ?>
+    </div>
+</div>
+<!-- Product Details Page End Here -->
+<?php require_once 'footer.php'; ?>

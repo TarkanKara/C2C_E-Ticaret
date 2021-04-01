@@ -371,10 +371,10 @@ if (isset($_SESSION['userkullanici_mail'])) {
                             </div>                          
                         </div>
                     </div>
-                    <div class="main-menu-area bg-primaryText" id="sticker">
+                    <div  class="main-menu-area bg-primaryText" id="sticker">
                         <div class="container">
                             <nav id="desktop-nav">
-                                <ul>
+                                <ul style="text-align: center;">
                                     <li class="active"><a href="index.php">ANASAYFA</a>
                                         <ul>
                                             <li><a href="index.php">ANASAYFA 1</a></li>

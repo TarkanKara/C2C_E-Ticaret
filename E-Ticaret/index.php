@@ -69,17 +69,18 @@
                         </div>
                         <div class="item-content">
                             <div class="item-info">
-                                <h3><a href="#"><?php echo $uruncek['urun_ad'] ?></a></h3>
+                                <h3><a href="urun-<?=seo($uruncek['urun_ad']."-".$uruncek['urun_id'])?>"><?php echo $uruncek['urun_ad'] ?></a></h3>
                                 <span><a href="kategori-<?=seo($uruncek['kategori_ad']."-".$uruncek['kategori_id'])?>"><?php echo $uruncek['kategori_ad'] ?></a></span>
                                 <div class="price"><?php echo $uruncek['urun_fiyat'] ?> TL</div>
                             </div>
                             <div class="item-profile">
                                 <div class="profile-title">
                                     <div class="img-wrapper"><img style="width: 48px; height: 48px;" src="<?php echo $uruncek['kullanici_magazafoto'] ?>" alt="profile" class="img-responsive img-circle"></div>
-                                    <span><b><?php echo $uruncek['kullanici_ad']." ".$uruncek['kullanici_soyad'] ?></b></span>
+                                    <span><b><a href="satici-<?=seo($uruncek['kullanici_ad']."-".$uruncek['kullanici_soyad'])."-".$uruncek['kullanici_id']?>"><?php echo $uruncek['kullanici_ad']." ".$uruncek['kullanici_soyad'] ?></a></b></span>
                                 </div>
                                 <div class="profile-rating">
                                     <a href=""><b>Tüm Ürünleri</b></a>
+
                                 <!--
                                 <ul>
                                     <li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -95,7 +96,7 @@
                 </div>
             </div>
         </div>
-
+<!--
 
              <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 yenitrend component">
                     <div class="single-item-grid">
@@ -116,7 +117,7 @@
                                 </div>
                                 <div class="profile-rating">
                                     <a href=""><b>Tüm Ürünleri</b></a>
-                                <!--
+                                
                                 <ul>
                                     <li><i class="fa fa-star" aria-hidden="true"></i></li>
                                     <li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -125,15 +126,15 @@
                                     <li><i class="fa fa-star" aria-hidden="true"></i></li>
                                     <li>(<span> 05</span> )</li>
                                 </ul>
-                            -->
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-
-
+-->
+<!--
              <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 populer component">
                     <div class="single-item-grid">
                         <div class="item-img">
@@ -153,7 +154,7 @@
                                 </div>
                                 <div class="profile-rating">
                                     <a href=""><b>Tüm Ürünleri</b></a>
-                                <!--
+                                
                                 <ul>
                                     <li><i class="fa fa-star" aria-hidden="true"></i></li>
                                     <li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -162,14 +163,14 @@
                                     <li><i class="fa fa-star" aria-hidden="true"></i></li>
                                     <li>(<span> 05</span> )</li>
                                 </ul>
-                            -->
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-<!--
+
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 wordpress joomla plugins"></div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 wordpress"></div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 wordpress joomla psd"></div>
